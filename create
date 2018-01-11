@@ -71,10 +71,7 @@ begin
   Dir.mkdir("#{vmdir}/qcow-creator") unless Dir.exist?("#{vmdir}/qcow-creator")
   system "virt-sparsify --compress --format qcow2 #{vmdir}/#{name}.qcow2 #{vmdir}/qcow-creator/#{name}.qcow2"
 
-  puts "Converting image to RAW format".green
-  system "qemu-img convert -f qcow2 -O raw #{vmdir}/#{name}.qcow2 #{vmdir}/#{name}.raw"
-
-  puts "Image created: #{vmdir}/#{name}.raw".bold
+  puts "Image created: #{vmdir}/#{name}.qcow2".bold
 
 rescue Interrupt
   puts "Quitting. Killing build VM."
