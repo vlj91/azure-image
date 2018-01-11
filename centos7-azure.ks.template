@@ -82,6 +82,14 @@ EOL
 # make sure firstboot doesn't start
 echo "RUN_FIRSTBOOT=NO" > /etc/sysconfig/firstboot
 
+yum -y install WALinuxAgent cloud-init
+sed -i -e 's/Provisioning.Enabled=y/Provisioning.Enabled=n/g' \
+       -e 's/Provisioning.UseCloudInit=n/Provisioning.UseCloudInit=y/g'
+       -e 's/Provisioning.DeleteRootPassword=y/Provisioning.DeleteRootPassword=n/g'
+
+systemctl enable cloud-init
+systemctl enable waagent
+
 yum clean all
 
 # XXX instance type markers - MUST match CentOS Infra expectation
