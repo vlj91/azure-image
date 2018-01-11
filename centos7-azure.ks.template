@@ -1,5 +1,6 @@
 auth --enableshadow --passalgo=sha512
 reboot
+url --url="mirror.centos.org/centos/7/os/x86_64"
 firewall --enabled --service=ssh
 firstboot --disable
 ignoredisk --only-use=vda
@@ -20,7 +21,7 @@ timezone UTC --isUtc
 # Disk
 bootloader --append="console=tty0" --location=mbr --timeout=1 --boot-drive=vda
 zerombr
-clearpart --all --initlabel
+clearpart --all --initlabel 
 part / --fstype="xfs" --ondisk=vda --size=4096 --grow
 
 %post --erroronfail
@@ -117,7 +118,6 @@ kernel
 nfs-utils
 rsync
 tar
-vim
 yum-utils
 -NetworkManager
 -aic94xx-firmware
